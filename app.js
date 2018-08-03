@@ -25,11 +25,11 @@ app.use('/wiki', wikiRouter)
 app.use('/user', userRouter)
 
 const init = async () => {
-  await models.db.sync({force: true})
+  await models.db.sync({force: false})
   //http server
   const PORT = 1337
   app.listen(PORT, () => {
     console.log(`App listening in port ${PORT}`);
   });
-}
+} 
 init();
