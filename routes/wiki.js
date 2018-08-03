@@ -5,10 +5,12 @@ const { Page } = require('../models')
 const wikiPage = require('../views/wikipage')
 const { addPage } = require('../views/')
 const { editPage } = require('../views/editPage')
+const { main } = require('../views/')
 
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    res.send('')
+    const allPages = await Page.findAll();
+    res.send(main(allPages));
   } catch (error) {
     next(error)
   }
