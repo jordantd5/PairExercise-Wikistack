@@ -3,7 +3,7 @@ const morgan = require('morgan')
 const layout = require('./views/layout')
 const models = require('./models');
 const wikiRouter = require('./routes/wiki')
-const userRouter = require('./')
+const userRouter = require('./routes/user')
 
 const app = express()
 

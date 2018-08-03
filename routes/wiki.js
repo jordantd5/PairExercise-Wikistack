@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
+const db = require('../models')
 
-const wikiPage = require('../views/wikiPage')
-const addPage = require('../views/addPage')
-const editPage = require('../views/editPage')
+const {wikiPage} = require('../views/wikiPage')
+const {addPage} = require('../views/')
+const {editPage} = require('../views/editPage')
 
-router.get('/', (res,req,next) =>{
+router.get('/', (req, res, next) =>{
     try {
         res.send('')
     } catch (error) {
@@ -13,7 +14,7 @@ router.get('/', (res,req,next) =>{
     }
 })
 
-router.post('/', (res,req,next) =>{
+router.post('/', (req, res, next) =>{
     try {
         res.send('')
     } catch (error) {
@@ -21,9 +22,9 @@ router.post('/', (res,req,next) =>{
     }
 })
 
-router.get('/add', (res,req,next) =>{
+router.get('/add', (req, res, next) =>{
     try {
-        res.send(addPage)
+        res.send(addPage());
     } catch (error) {
         next(error)
     }
