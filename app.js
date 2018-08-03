@@ -2,6 +2,8 @@ const express = require('express')
 const morgan = require('morgan')
 const layout = require('./views/layout')
 const models = require('./models');
+const wikiRouter = require('./routes/wiki')
+const userRouter = require('./')
 
 const app = express()
 
@@ -18,6 +20,9 @@ then(() => {
 app.get('/', (req,res,next) => {
     res.send(layout(''))
 })
+
+app.use('/wiki', wikiRouter)
+app.use('/user', userRouter)
 
 const init = async () => {
   await models.db.sync({force: true})
