@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const db = require('../models')
+const {Page} = require('../models')
 
 const { wikiPage } = require('../views/wikiPage')
 const { addPage } = require('../views/')
@@ -15,17 +15,13 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-  try {
-    const form = res.json(req.body)
-    const page = new Page({
-      title: form.title,
-      content: form.content
-    })
-    await page.save()
-    res.redirect('/')
-  } catch (error) {
-    next(error)
-  }
+    try {
+        await Page.create(req.body)
+
+        res.redirect('/')
+    } catch (error) {
+        next(error)
+    }
 })
 
 router.get('/add', (req, res, next) => {

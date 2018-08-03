@@ -32,6 +32,26 @@ const User = db.define('user', {
     }
   }
 })
+const slugGen = function (title) {
+  if (title) {
+    return title.replace(/\s+/g, '_').replace(/\W/g, '');
+  } else {
+    let result = '';
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < 8; i++){
+      result += letters.charAt(Math.floor(Math.random() * letters.length));
+    }
+    return result;
+  }
+}
+
+Page.beforeValidate((page, options) => {
+  let slugTitle = slugGen(page.title);
+  page.slug = slugTitle;
+  if (!page.title) {
+    page.title = slugTitle
+  }
+})
 
 module.exports = {
   db, Page, User
