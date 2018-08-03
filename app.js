@@ -18,7 +18,7 @@ then(() => {
 })
 
 app.get('/', (req,res,next) => {
-    res.send(layout(''))
+    res.redirect('/wiki')
 })
 
 app.use('/wiki', wikiRouter)
