@@ -8,7 +8,8 @@ const Page = db.define('page', {
   },
   slug: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   content: {
     type: Sequelize.TEXT,
@@ -27,11 +28,12 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate: {
-      isEmail: true
-    }
+    isEmail: true
   }
 })
+
+Page.belongsTo(User, { as: 'author' });
+
 const slugGen = function (title) {
   if (title) {
     return title.replace(/\s+/g, '_').replace(/\W/g, '');
